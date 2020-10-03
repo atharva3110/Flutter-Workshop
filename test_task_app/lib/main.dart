@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 void main() {
   runApp(MyApp());
 }
@@ -71,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(
                       width: 55,
                       child: RaisedButton(
-                        onPressed: (){},
+                        onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => newTask()));},
                         color: Colors.pink,
                           splashColor: Colors.purpleAccent,
                         shape: RoundedRectangleBorder(
@@ -238,6 +239,38 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
 
+      ),
+    );
+  }
+}
+
+class newTask extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: (AppBar(leading: Icon(Icons.arrow_back_ios, color: Colors.black,),
+        backgroundColor: Colors.white60,
+        elevation: 0)
+      ),
+      body: Column(
+        children: <Widget>[
+          TextField(
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 60),
+              border: InputBorder.none,
+              hintText: 'Add Task'
+          ),
+            style: TextStyle(
+                color: Colors.black,
+                fontSize: 25
+            ),
+        ),
+          Text(
+            'Choose date'
+          ),
+
+
+        ],
       ),
     );
   }
