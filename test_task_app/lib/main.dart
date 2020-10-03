@@ -209,53 +209,28 @@ class _MyHomePageState extends State<MyHomePage> {
               child: ListView.builder(
                 itemCount: tasks.length,
                 itemBuilder: (context, index){
-                return ListTile(
-                  title: Row(
-                    children: [
-                      SizedBox(
-                          width: 300,
-                          child: Text(tasks[index])
-                      ),
-                      GestureDetector(
-                        onTap: (){
-                          Dialog d= Dialog(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)), //this right here
-                              child: Container(
-                                height: 100,
-                                width: 300.0,
-                                color: Colors.white,
-                                child: Column(
-                                  children: [
-                                    Text('Are you sure you want to delete this task??'),
-                                    Row(
-                                      children: [
-                                        FlatButton(
-                                          child: Text('Yes'),
-                                          onPressed: (){
-                                            setState(() {
-                                              tasks.removeAt(index);
-                                            });
-                                            Navigator.pop(context);
-                                          },
-                                        ),
+                return Dismissible(
+                  key: Key(tasks.toString()),
+                  onDismissed: (direction){
+                    setState(() {
+                      tasks.removeAt(index);
+                      Scaffold.of(context)
+                          .showSnackBar(SnackBar(content: Text("Task dismissed")));
 
-                                        FlatButton(
-                                          child: Text("No"),
-                                          onPressed: (){
-                                            Navigator.pop(context);
-                                          },
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ));
-                          showDialog(context: context, builder: (BuildContext contex)=>d);
-                        },
-                          child: Icon(Icons.delete))
-                    ],
+                    });
+                  },
+                  child: ListTile(
+                    title: Row(
+                      children: [
+                        SizedBox(
+                            width: 300,
+                            child: Text(tasks[index])
+                        ),
+
+                      ],
+                    ),
+                    subtitle: Text(description[index]),
                   ),
-                  subtitle: Text(description[index]),
                 );
                 },
               ),
