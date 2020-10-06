@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:test_task_app/newTask.dart';
 
 void main() {
   runApp(MyApp());
@@ -29,8 +29,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List tasks=['as','asd','asd'];
-  List description=['des1', 'des2', 'des3'];
+  List tasks=['as','asd','asd2'];
+  List description=['de1', 'des2', 'des4'];
+
+  TextEditingController nameController = TextEditingController();
+
+  void addItemToList(){
+    setState(() {
+      tasks.insert(0, nameController.text);
+    });
+  }
 
   Color dataColor= Colors.greenAccent;
   @override
@@ -72,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(
                       width: 55,
                       child: RaisedButton(
-                        onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => newTask()));},
+                        onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => NewTask()));},
                         color: Colors.pink,
                           splashColor: Colors.purpleAccent,
                         shape: RoundedRectangleBorder(
@@ -245,34 +253,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class newTask extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: (AppBar(leading: Icon(Icons.arrow_back_ios, color: Colors.black,),
-        backgroundColor: Colors.white60,
-        elevation: 0)
-      ),
-      body: Column(
-        children: <Widget>[
-          TextField(
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(left: 60),
-              border: InputBorder.none,
-              hintText: 'Add Task'
-          ),
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 25
-            ),
-        ),
-          Text(
-            'Choose date'
-          ),
-
-
-        ],
-      ),
-    );
-  }
-}
