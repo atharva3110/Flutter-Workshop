@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test_task_app/Tasks.dart';
 import 'package:test_task_app/newTask.dart';
 
 void main() {
@@ -29,22 +30,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List tasks=['as','asd','asd2'];
-  List description=['de1', 'des2', 'des4'];
+
 
   TextEditingController nameController = TextEditingController();
-
-  void addItemToList(){
-    setState(() {
-      tasks.insert(0, nameController.text);
-    });
-  }
-
   Color dataColor= Colors.greenAccent;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      
       body: Container(
         child: Column(
           children: [
@@ -80,7 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     SizedBox(
                       width: 55,
                       child: RaisedButton(
-                        onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context) => NewTask()));},
+                        onPressed: (){
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (contex)=>NewTask()));
+                        },
                         color: Colors.pink,
                           splashColor: Colors.purpleAccent,
                         shape: RoundedRectangleBorder(
@@ -216,15 +211,16 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 281,
               color: Colors.pinkAccent[100],
               child: ListView.builder(
-                itemCount: tasks.length,
+                itemCount: Task_list.get_list().length,
                 itemBuilder: (context, index){
                 return Dismissible(
-                  key: Key(tasks.toString()),
+
+                  key: Key(Task_list.get_list().toString()),
                   onDismissed: (direction){
                     setState(() {
-                      tasks.removeAt(index);
+                      Task_list.remove_item(index);
                       Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text("Task dismissed")));
+                          .showSnackBar(SnackBar(content: Text("Task dismissed!!")));
 
                     });
                   },
@@ -234,12 +230,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         SizedBox(
                             width: 300,
-                            child: Text(tasks[index])
+                            child: Text(Task_list.get_task_info(index)["task"].toString())
                         ),
-
                       ],
                     ),
-                    subtitle: Text(description[index]),
+                    subtitle: Row(children: [
+                      Text(Task_list.get_task_info(index)["task_description"].toString()),
+                      Text(Task_list.get_task_info(index)["task_type"].toString()),
+                      Text(Task_list.get_task_info(index)["task_time"].toString())
+                    ],)
                   ),
                 );
                 },

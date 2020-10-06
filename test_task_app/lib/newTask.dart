@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:chips_choice/chips_choice.dart';
 import 'package:test_task_app/main.dart';
+import 'package:test_task_app/Tasks.dart';
 
 class NewTask extends StatefulWidget {
   @override
@@ -12,7 +13,7 @@ class _NewTaskState extends State<NewTask> {
 
   int tag = 1;
   List<String> tags = [];
-
+  String task_name, task_description, task_type;
   List<String> options = [
     'Work', 'Personal', 'Shopping',
     'Health', 'Other',
@@ -26,7 +27,7 @@ class _NewTaskState extends State<NewTask> {
       appBar: (AppBar(
         leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios, color: Colors.black,),
-            onPressed: (){Navigator.pop(context,true);}
+            onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyHomePage()));}
         ),
           backgroundColor: Colors.white60,
           elevation: 0,)
@@ -34,6 +35,9 @@ class _NewTaskState extends State<NewTask> {
       body: Column(
         children: <Widget>[
           TextField(
+            onChanged: (task)=>{
+              task_name=task
+            },
             decoration: InputDecoration(
                 contentPadding: EdgeInsets.only(left: 60),
                 border: InputBorder.none,
@@ -68,6 +72,7 @@ class _NewTaskState extends State<NewTask> {
         onChanged: (val) => setState(() => tag = val),
         ),
          TextField(
+           onChanged: (des)=>{task_description=des},
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
             maxLines: null,
@@ -80,6 +85,10 @@ class _NewTaskState extends State<NewTask> {
 
           RaisedButton(
             onPressed: () {
+              Task_list list=Task_list();
+              Task task= Task(task_name,task_description,options[tag], _date.toString());
+              Task_list.add_to_list(task);
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
             },
             child:  Text('Add Task',
             style: TextStyle(fontSize: 20)),)
