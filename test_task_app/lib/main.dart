@@ -169,23 +169,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
-            FloatingActionButton(
-              child: Icon(
-                Icons.add,
-                size: 50,
-                color: Colors.white,
-              ),
-              backgroundColor: Color(0xfffe379f),
-              splashColor: Color(0xff173D7B),
-              shape: CircleBorder(),
-              onPressed: () {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (contex) => NewTask()));
-              },
-            ),
           ],
         ),
       ),
-    ));
+    ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          size: 50,
+          color: Colors.white,
+        ),
+        backgroundColor: Color(0xfffe379f),
+        splashColor: Color(0xff173D7B),
+        shape: CircleBorder(),
+        onPressed: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (contex) => NewTask()));
+        },
+      ),
+    );
   }
 }

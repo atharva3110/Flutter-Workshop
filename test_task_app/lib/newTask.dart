@@ -164,7 +164,7 @@ class _NewTaskState extends State<NewTask> {
           ),
           ListTile(
             leading: FlatButton(
-              child: Icon(Icons.calendar_today_outlined),
+              child: Icon(Icons.calendar_today),
               onPressed: () {
                 DatePicker.showDateTimePicker(context, showTitleActions: true,
                     onChanged: (date) {
