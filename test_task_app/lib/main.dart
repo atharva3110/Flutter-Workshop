@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:test_task_app/Tasks.dart';
 import 'package:test_task_app/newTask.dart';
+
+import 'newTask.dart';
+import 'splashscreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,12 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: splashScreen(),
     );
   }
 }
@@ -30,225 +35,157 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   TextEditingController nameController = TextEditingController();
-  Color dataColor= Colors.greenAccent;
+  Color dataColor = Colors.greenAccent;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      body: Container(
+        body: SingleChildScrollView(
+      child: Container(
+        // color: Color(0xffe8e8e8),
         child: Column(
           children: [
-            Container(
-             height: 120,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.blue[200],
-              child: Center(
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 40, 80, 10),
-                      child: Column(
-
-                        children: [
-                          Text('Hello Gaurang!!',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25
-                          ),
-                          ),
-                          Text('Today you have 12 tasks',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey
-                          ),)
-                        ],
-                      ),
-                    ),
-
-                    SizedBox(
-                      width: 55,
-                      child: RaisedButton(
-                        onPressed: (){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (contex)=>NewTask()));
-                        },
-                        color: Colors.pink,
-                          splashColor: Colors.purpleAccent,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(7),
+            Stack(
+              children: [
+                Container(
+                  height: 200,
+                  width: MediaQuery.of(context).size.width,
+                  child: Image.asset(
+                    'assets/images/background1.jpg',
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Shimmer.fromColors(
+                  baseColor: Color(0xff173D7B),
+                  highlightColor: Color(0xfffe379f),
+                  child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 40, 20, 0),
+                        child: Text(
+                          'Just do it!',
+                          style:
+                              TextStyle(fontFamily: 'Righteous', fontSize: 15),
                         ),
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        )
-                      ),
-                    )
-                  ],
+                      )),
+                ),
+              ],
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Text(
+                  'Hello There',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(
+                    fontSize: 75,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xff173D7B),
+                  ),
                 ),
               ),
-             ),
-
-            Container(
-              color: Colors.amber,
-              height: 190,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                children: [
-                  Center(
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(33, 10, 20, 10),
-                          child: Container(
-                            height: 40,
-                            width: 130,
-                            decoration: BoxDecoration(
-                                color: dataColor,
-                              borderRadius: BorderRadius.circular(10)
-                            ),
-                            child: Column(
-                              children: [
-                                Text('16                         ',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white
-                                ),
-                                ),
-                                Text('tasks completed')
-                              ],
-                            ),
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 10, 20, 10),
-                          child: Container(
-
-                            height: 40,
-                            width: 130,
-                            decoration: BoxDecoration(
-                                color: dataColor,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Text(
+                  'Tasks to complete:',
+                  style: TextStyle(
+                    color: Colors.black38,
+                    fontSize: 15,
                   ),
-
-                  Center(
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(33, 10, 20, 10),
-                          child: Container(
-                            height: 40,
-                            width: 130,
-                            decoration: BoxDecoration(
-                                color: dataColor,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 10, 20, 10),
-                          child: Container(
-
-                            height: 40,
-                            width: 130,
-                            decoration: BoxDecoration(
-                                color: dataColor,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ),
-
-                  Center(
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(33, 10, 20, 10),
-                          child: Container(
-                            height: 40,
-                            width: 130,
-                            decoration: BoxDecoration(
-                                color: dataColor,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                          ),
-                        ),
-
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 10, 20, 10),
-                          child: Container(
-
-                            height: 40,
-                            width: 130,
-                            decoration: BoxDecoration(
-                                color: dataColor,
-                                borderRadius: BorderRadius.circular(10)
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-
             Container(
-              height: 281,
-              color: Colors.pinkAccent[100],
+              height: 400,
+              // color: Colors
               child: ListView.builder(
                 itemCount: Task_list.get_list().length,
-                itemBuilder: (context, index){
-                return Dismissible(
-
-                  key: Key(Task_list.get_list().toString()),
-                  onDismissed: (direction){
-                    setState(() {
-                      Task_list.remove_item(index);
-                      Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text("Task dismissed!!")));
-
-                    });
-                  },
-                  background: Container(color: Colors.purpleAccent,),
-                  child: ListTile(
-                    title: Row(
-                      children: [
-                        SizedBox(
-                            width: 300,
-                            child: Text(Task_list.get_task_info(index)["task"].toString())
-                        ),
-                      ],
+                itemBuilder: (context, index) {
+                  return Dismissible(
+                    key: Key(Task_list.get_list().toString()),
+                    onDismissed: (direction) {
+                      setState(() {
+                        Task_list.remove_item(index);
+                        Scaffold.of(context).showSnackBar(
+                            SnackBar(content: Text("Task dismissed")));
+                      });
+                    },
+                    background: Container(
+                      color: Color(0xff173D7B),
                     ),
-                    subtitle: Row(children: [
-                      Text(Task_list.get_task_info(index)["task_description"].toString()),
-                      Text(Task_list.get_task_info(index)["task_type"].toString()),
-                      Text(Task_list.get_task_info(index)["task_time"].toString())
-                    ],)
-                  ),
-                );
+                    child: Card(
+                      color: Color(0xffAFD7F6),
+                      child: ListTile(
+                          title: Row(
+                            children: [
+                              SizedBox(
+                                  width: 300,
+                                  child: Text(
+                                    Task_list.get_task_info(index)["task"]
+                                        .toString(),
+                                    style: TextStyle(
+                                        fontSize: 30, color: Color(0xff173D7B)),
+                                  )),
+                            ],
+                          ),
+                          subtitle: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                    Task_list.get_task_info(
+                                            index)["task_description"]
+                                        .toString(),
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                    )),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text('Category: ' +
+                                    Task_list.get_task_info(index)["task_type"]
+                                        .toString()),
+                              ),
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text('Due: ' +
+                                    Task_list.get_task_info(index)["task_time"]
+                                        .toString()),
+                              ),
+                            ],
+                          )),
+                    ),
+                  );
                 },
               ),
-            )
+            ),
+            FlatButton(
+              child: Icon(
+                Icons.add,
+                size: 50,
+                color: Colors.white,
+              ),
+              color: Color(0xfffe379f),
+              splashColor: Color(0xff173D7B),
+              shape: CircleBorder(),
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (contex) => NewTask()));
+              },
+            ),
           ],
         ),
-
       ),
-    );
+    ));
   }
 }
-

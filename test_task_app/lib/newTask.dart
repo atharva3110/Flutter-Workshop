@@ -10,13 +10,15 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
-
   int tag = 1;
   List<String> tags = [];
   String task_name, task_description, task_type;
   List<String> options = [
-    'Work', 'Personal', 'Shopping',
-    'Health', 'Other',
+    'Work',
+    'Personal',
+    'Shopping',
+    'Health',
+    'Other',
   ];
 
   var _date;
@@ -24,75 +26,206 @@ class _NewTaskState extends State<NewTask> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (AppBar(
-        leading: new IconButton(
-            icon: new Icon(Icons.arrow_back_ios, color: Colors.black,),
-            onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyHomePage()));}
-        ),
-          backgroundColor: Colors.white60,
-          elevation: 0,)
-      ),
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: <Widget>[
-          TextField(
-            onChanged: (task)=>{
-              task_name=task
-            },
-            decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(left: 60),
-                border: InputBorder.none,
-                hintText: 'Add Task'
-            ),
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 25
+          SizedBox(
+            height: 30,
+          ),
+          ListTile(
+            trailing: FlatButton(
+                child: Icon(
+                  Icons.cancel,
+                  size: 30,
+                  color: Colors.black45,
+                ),
+                onPressed: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => MyHomePage()));
+                }),
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: Text(
+                'Add Task',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
+              ),
             ),
           ),
-          FlatButton(
+          SizedBox(
+            height: 10,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: Text(
+                'Tackle your goals in daily doses',
+                style: TextStyle(
+                  color: Colors.black38,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: Text(
+                'Name the task',
+                style: TextStyle(
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: TextField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black45),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black45),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                labelText: 'e.g. Learn Flutter',
+                labelStyle: TextStyle(
+                  color: Colors.black26,
+                ),
+              ),
+              onChanged: (task) => {task_name = task},
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: Text(
+                'Description',
+                style: TextStyle(
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            child: TextField(
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black45),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black45),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                labelText: 'e.g. Code-Along',
+                labelStyle: TextStyle(
+                  color: Colors.black26,
+                ),
+              ),
+              onChanged: (des) => {task_description = des},
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Select Date and Time',
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: FlatButton(
+              child: Icon(Icons.calendar_today_outlined),
               onPressed: () {
-                DatePicker.showDateTimePicker(context, showTitleActions: true, onChanged: (date) {
-                  print('change $date in time zone ' + date.timeZoneOffset.inHours.toString());
+                DatePicker.showDateTimePicker(context, showTitleActions: true,
+                    onChanged: (date) {
+                  print('change $date in time zone ' +
+                      date.timeZoneOffset.inHours.toString());
                   _date = date;
                 }, onConfirm: (date) {
                   print('confirm $date');
                 }, currentTime: DateTime(2020, 9, 1, 23, 12, 34));
               },
-              child: Text(
-                'Click to select Date and Time',
-                style: TextStyle(color: Colors.blue, fontSize: 20),
-              )),
-          Text('$_date'),
-        ChipsChoice<int>.single(
-        value: tag,
-        options: ChipsChoiceOption.listFrom<int, String>(
-        source: options,
-        value: (i, v) => i,
-        label: (i, v) => v,
-        ),
-        onChanged: (val) => setState(() => tag = val),
-        ),
-         TextField(
-           onChanged: (des)=>{task_description=des},
-            textInputAction: TextInputAction.newline,
-            keyboardType: TextInputType.multiline,
-            maxLines: null,
-           decoration: InputDecoration(
-               contentPadding: EdgeInsets.only(left: 60),
-               border: InputBorder.none,
-               hintText: 'Task Description'
-           ),
+            ),
+            trailing: Text('$_date'),
           ),
-
-          RaisedButton(
+          SizedBox(
+            height: 10,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: Text(
+                'Category',
+                style: TextStyle(
+                  color: Colors.black87,
+                ),
+              ),
+            ),
+          ),
+          ChipsChoice<int>.single(
+            value: tag,
+            options: ChipsChoiceOption.listFrom<int, String>(
+              source: options,
+              value: (i, v) => i,
+              label: (i, v) => v,
+            ),
+            onChanged: (val) => setState(() => tag = val),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          FlatButton(
             onPressed: () {
-              Task_list list=Task_list();
-              Task task= Task(task_name,task_description,options[tag], _date.toString());
+              Task_list list = Task_list();
+              Task task = Task(
+                  task_name, task_description, options[tag], _date.toString());
               Task_list.add_to_list(task);
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>MyHomePage()));
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => MyHomePage()));
             },
-            child:  Text('Add Task',
-            style: TextStyle(fontSize: 20)),)
-
+            color: Colors.blue,
+            splashColor: Color(0xff020061),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(30))),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+              child: Text(
+                'Save Task',
+                style: TextStyle(color: Colors.white, fontSize: 14),
+              ),
+            ),
+          ),
         ],
       ),
     );
