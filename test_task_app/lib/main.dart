@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   'Hello There',
                   textAlign: TextAlign.left,
                   style: TextStyle(
-                    fontSize: 75,
+                    fontSize: 45,
                     fontWeight: FontWeight.bold,
                     color: Color(0xff173D7B),
                   ),
@@ -169,13 +169,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
-            FlatButton(
+            FloatingActionButton(
               child: Icon(
                 Icons.add,
                 size: 50,
                 color: Colors.white,
               ),
-              color: Color(0xfffe379f),
+              backgroundColor: Color(0xfffe379f),
               splashColor: Color(0xff173D7B),
               shape: CircleBorder(),
               onPressed: () {
