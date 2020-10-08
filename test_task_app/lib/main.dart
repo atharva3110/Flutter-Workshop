@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: splashScreen(),
+      home: splashScreen(),//vaibhav
     );
   }
 }
@@ -42,9 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
-      child: Container(
+      child: Container(//gaurang
         // color: Color(0xffe8e8e8),
-        child: Column(
+        child: Column(//gaurang
           children: [
             Stack(
               children: [
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Text(
+                child: Text(//gaurang
                   'Hello There',
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
               alignment: Alignment.centerLeft,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Text(
+                child: Text(//gaurang
                   'Tasks to complete:',
                   style: TextStyle(
                     color: Colors.black38,
@@ -105,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
             ),
-            Container(
+            Container(//gaurang
               height: 400,
               // color: Colors
               child: ListView.builder(
@@ -125,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     child: Card(
                       color: Color(0xffAFD7F6),
-                      child: ListTile(
+                      child: ListTile(//gaurang
                           title: Row(
                             children: [
                               SizedBox(
@@ -138,7 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   )),
                             ],
                           ),
-                          subtitle: Column(
+                          subtitle: Column(//guarang
                             children: [
                               Align(
                                 alignment: Alignment.centerLeft,
@@ -173,7 +173,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(//gaurang
         child: Icon(
           Icons.add,
           size: 50,
